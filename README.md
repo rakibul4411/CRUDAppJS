@@ -9,6 +9,7 @@ ASP.NET MVC &amp; AngulaJS CRUD Application (Database First)
 
 ## Sql Script
 
+```
 CREATE DATABASE EmployeeDB
 GO
 USE EmployeeDB
@@ -23,3 +24,4 @@ CREATE TABLE [Employee].[EmpBasicInfo](
 	[Phone] [VARCHAR](30) NOT NULL
  CONSTRAINT [PK_Employee.Employees] PRIMARY KEY CLUSTERED ([EmpID] ASC)
 )
+```
