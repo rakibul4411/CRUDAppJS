@@ -1,0 +1,100 @@
+﻿<div ng-controller="mainController">
+    <div class="col-md-12" style="margin:auto; border:12px solid GhostWhite;padding: 0px!important">
+        <div class="col-md-12" style="background-color: MidnightBlue !important;margin: 0px !important;">
+            <div class="col-md-6">
+                <h3 style="color:white;">Manage Employee</h3>
+            </div>
+            <div class="col-md-offset-3 col-md-3" style=" padding: 11px 6px">
+                <button class="btn btn-danger" ng-click="btnBulkDelete()"><i class="fa fa-minus-circle" style="padding: 0 4px;"></i>Delete</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#AddEmployeeeModal"><i class="fa fa-plus-circle" style="padding: 0 4px;"></i>Add New Employee</button>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="text-align: right;"><input type="checkbox" ng-model="checkAll" ng-change="toggleAll()"></th>
+                    <th class="hidden">EmpID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*<tr ng-repeat="EBI in EmpBasicInfoVM">*@
+                <tr dir-paginate="EBI in EmpBasicInfoVM | itemsPerPage: 5">
+                    <td style="text-align: right;"><input  type="checkbox" ng-model="EBI.Selected" ng-change="toggleOne()" style=""></td>
+                    <td class="hidden">{{EBI.EmpID}}</td>
+                    <td>{{EBI.Name}}</td>
+                    <td>{{EBI.Email}}</td>
+                    <td>{{EBI.Address}}</td>
+                    <td>{{EBI.Phone}} </td>
+                    <td>
+                        <button class="btn btn-light text-danger" data-toggle="modal" data-target="#AddEmployeeeModal" ng-click="btnUpdate(EBI)"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-light text-danger" ng-click="btnDelete(EBI)"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="false"
+            template-url=""
+            auto-hide="">
+        </dir-pagination-controls>
+
+        <!-- Modal -->
+        <div class="modal fade" id="AddEmployeeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title" id="exampleModalLongTitle" style="padding:0px!important">Add New Employee</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="padding:10px;" class="row">
+                            <div class="col-md-12" style="margin-left:20px;">
+                                <form ng-model="model">
+                                    <div class="form-group hidden">
+                                        <label class="control-label">EmpID</label>
+                                        <input id="txtEmpID" class="form-control" ng-model="model.EmpID" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Name</label>
+                                        <input id="txtName" class="form-control" ng-model="model.Name" required />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input id="txtAge" class="form-control" ng-model="model.Email" required />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Address</label>
+                                        <input id="txtAddress" class="form-control" ng-model="model.Address" required />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Phone</label>
+                                        <input id="txtPhone" class="form-control" ng-model="model.Phone" required />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="btnSubmit" type="submit" value="{{btnSubmit}}" ng-click="Click(model)" class="btn btn-primary btn-lg" />
+                                        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" style="margin-left:61%;">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="~/Scripts/default.js"></script>
+    </div>
+</div>
